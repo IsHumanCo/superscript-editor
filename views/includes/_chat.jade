@@ -24,6 +24,16 @@ script.
   var lastMessage = "";
   var lastReplyId, lastTopicId, lastGambitId;
   var oldscrollHeight = $(".panel-body")[0].scrollHeight;
+
+  function speak(textToSpeak) {
+    // Create a new instance of SpeechSynthesisUtterance
+    var newUtterance = new SpeechSynthesisUtterance();
+    // Set the text
+    newUtterance.text = textToSpeak;
+    // Add this text to the utterance queue
+    window.speechSynthesis.speak(newUtterance);
+  }
+
   // Send message
   $('#btn-input').bind('keyup', function(e) {
     var code = e.keyCode || e.which;
@@ -52,6 +62,8 @@ script.
     }
     var botChat = ich.botChat(msgObj);
     $('.chat').append(botChat);
+
+    speak(msgObj.string);
     
     var newscrollHeight = $(".panel-body")[0].scrollHeight;
     if(newscrollHeight > oldscrollHeight){ 
