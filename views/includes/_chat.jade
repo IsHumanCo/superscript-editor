@@ -87,6 +87,20 @@ script.
       $('#topicId option[value=""]').prop('selected', true);
     }
   }, ".js-editDirect");
+
+  // Let's define a command.
+  var commands = {
+    'say *message': function(message) { 
+      $('#btn-input').val(''+message);
+      $('#btn-chat').click();
+    }
+  };
+
+  // Add our commands to annyang
+  annyang.addCommands(commands);
+
+  // Start listening.
+  annyang.start();
   
 script(id="botChat" type="text/html").
   <li class="left js-bot clearfix" data-gambit-id="{{gambitId}}" data-reply-id="{{replyId}}">
